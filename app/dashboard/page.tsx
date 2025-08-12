@@ -4,27 +4,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-// Fonction utilitaire pour lire les cookies côté client
-function getCookie(name: string): string | null {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-  return null;
-}
-
-// Fonction utilitaire pour supprimer les cookies
-function deleteCookie(name: string) {
-  document.cookie = `${name}=; path=/; max-age=0`;
-}
-
 interface User {
   id: number;
   email: string;
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   username?: string;
-  status?: string;
-  created_at: string;
+  createdAt: string;
   avatar?: string;
 }
 
@@ -44,10 +30,10 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Récupération des tokens depuis les cookies
-        const accessToken = getCookie('access-token');
-        const client = getCookie('client');
-        const uid = getCookie('uid');
+        // Récupération des données utilisateur
+        const accessToken = localStorage.getItem('access-token');
+        const client = localStorage.getItem('client');
+        const uid = localStorage.getItem('uid');
 
         if (!accessToken || !client || !uid) {
           router.push('/login');
@@ -78,13 +64,11 @@ export default function DashboardPage() {
         console.log('✅ Données utilisateur récupérées:', userData);
 
         // Récupération des statistiques utilisateur
-        const statsResponse = await fetch('http://127.0.0.1:3000/api/v1/user/stats', {
+        const statsResponse = await fetch('/api/user/stats', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'access-token': accessToken,
-            'client': client,
-            'uid': uid
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           },
         });
 
@@ -105,12 +89,12 @@ export default function DashboardPage() {
   }, [router]);
 
   const handleLogout = async () => {
-    const accessToken = getCookie('access-token');
-    const client = getCookie('client');
-    const uid = getCookie('uid');
+    const accessToken = localStorage.getItem('access-token');
+    const client = localStorage.getItem('client');
+    const uid = localStorage.getItem('uid');
 
     try {
-      const response = await fetch('http://127.0.0.1:3000/api/v1/auth/sign_out', {
+      const response = await fetch('http://localhost:3000/api/v1/auth/sign_out', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -128,10 +112,10 @@ export default function DashboardPage() {
     } catch (err) {
       console.error('❌ Erreur réseau pendant la déconnexion', err);
     } finally {
-      // Supprimer les cookies
-      deleteCookie('access-token');
-      deleteCookie('client');
-      deleteCookie('uid');
+      // Toujours nettoyer les données locales
+      localStorage.removeItem('access-token');
+      localStorage.removeItem('client');
+      localStorage.removeItem('uid');
 
       router.push('/login');
     }
@@ -251,13 +235,13 @@ export default function DashboardPage() {
                       <dt className="text-sm font-medium text-gray-500">Email</dt>
                       <dd className="mt-1 text-sm text-gray-900">{user.email}</dd>
                     </div>
-                    {user.first_name && (
+                    {user.firstName && (
                       <div>
                         <dt className="text-sm font-medium text-gray-500">Prénom</dt>
                         <dd className="mt-1 text-sm text-gray-900">{user.first_name}</dd>
                       </div>
                     )}
-                    {user.last_name && (
+                    {user.lastName && (
                       <div>
                         <dt className="text-sm font-medium text-gray-500">Nom</dt>
                         <dd className="mt-1 text-sm text-gray-900">{user.last_name}</dd>
