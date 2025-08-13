@@ -4,9 +4,9 @@
 import { useState, useEffect } from 'react';
 
 // components
-import Header from './components/Header';
-import IconesSlide1 from './components/IconesSlide1';
-import Footer from './components/Footer';
+import Header from './_components/Header';
+import IconesSlide1 from './_components/IconesSlide1';
+import Footer from './_components/Footer';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);

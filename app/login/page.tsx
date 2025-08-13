@@ -2,16 +2,38 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { loginAction } from './actions'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Connect to backend
-    console.log('Login attempt:', { email, password })
+    setIsLoading(true)
+    setError('')
+
+    try {
+      const formData = new FormData()
+      formData.append('email', email)
+      formData.append('password', password)
+
+      // Utiliser la Server Action pour l'authentification
+      const result = await loginAction(formData)
+
+      if (result?.success === false) {
+        setError(result.error || 'Erreur de connexion')
+      }
+      // Si succès, la redirection est gérée par la Server Action
+    } catch (error) {
+      setError('Erreur de connexion. Veuillez réessayer.')
+      console.error('Erreur login:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -24,6 +46,12 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
@@ -75,9 +103,10 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all font-medium"
+              disabled={isLoading}
+              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Se connecter
+              {isLoading ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
 
