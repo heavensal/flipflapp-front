@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 // components
 import Header from './_components/Header';
 import IconesSlide1 from './_components/IconesSlide1';
+import IconesSlide2 from './_components/IconesSlide2';
 import Footer from './_components/Footer';
 
 export default function Home() {
@@ -13,11 +14,13 @@ export default function Home() {
 
   const slides = [
     {
+      component: <IconesSlide1 />,
       title: "Organise ton match de football",
       description: "Planifie un match rapidement: donne l'heure, l'endroit, le nombre de joueurs. C'est toi qui décide."
 
     },
     {
+      component: <IconesSlide2 />,
       title: "Invite tes amis",
       description: "Ils sont sur la feuille de match ? Sur le banc ? Tes amis peuvent facilement rejoindre le match.",
     },
@@ -74,7 +77,7 @@ export default function Home() {
 
                       {/* Zone des icônes - hauteur fixe pour tous les slides */}
                       <div className="h-[30%] sm:h-48 mb-8 flex items-center justify-center">
-                        <IconesSlide1 />
+                        {slide.component}
                       </div>
 
                       {/* Zone du titre - hauteur fixe */}
