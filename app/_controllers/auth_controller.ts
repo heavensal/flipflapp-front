@@ -14,7 +14,12 @@ export interface AuthTokens {
 
 export interface AuthResponse {
   success: boolean;
-  data?: any;
+  data?: {
+    id?: number;
+    email?: string;
+    name?: string;
+    [key: string]: unknown;
+  };
   error?: string;
 }
 

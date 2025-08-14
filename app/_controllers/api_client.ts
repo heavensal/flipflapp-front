@@ -1,10 +1,6 @@
 // app/_controllers/api_client.ts
 import { authController } from './auth_controller';
 
-interface ProfileData {
-  [key: string]: unknown;
-}
-
 export class ApiClient {
   private readonly API_BASE_URL = 'http://127.0.0.1:3000';
 
@@ -79,36 +75,41 @@ export class ApiClient {
     return await response.json();
   }
 
-  /**
-   * Créer un nouvel événement
-   */
-  async createEvent(eventData: any) {
-    const response = await this.authenticatedFetch('/api/v1/events', {
-      method: 'POST',
-      body: JSON.stringify({ event: eventData }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Erreur lors de la création de l\'événement');
-  /**
-   * Mettre à jour le profil utilisateur
-   */
-  async updateProfile(profileData: ProfileData) {
-  /**
-   * Mettre à jour le profil utilisateur
-   */
-  async updateProfile(profileData: any) {
-    const response = await this.authenticatedFetch('/api/v1/auth', {
-      method: 'PUT',
-      body: JSON.stringify(profileData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Erreur lors de la mise à jour du profil');
-    }
-    return await response.json();
-  }
 }
 
 // Export singleton instance
 export const apiClient = new ApiClient();
+
+// app/_controllers/auth_controller.ts
+export class AuthController {
+
+  async getAuthTokens() {
+    // Implementation to retrieve auth tokens from cookies or storage
+    // This is a placeholder - you'll need to implement the actual logic
+    const accessToken = this.getCookie('access-token');
+    const client = this.getCookie('client');
+    const uid = this.getCookie('uid');
+
+    if (accessToken && client && uid) {
+      return {
+        accessToken,
+        client,
+        uid
+      };
+    }
+
+    return null;
+  }
+
+  private getCookie(name: string): string | null {
+    // Simple cookie getter implementation
+    if (typeof document !== 'undefined') {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop()?.split(';').shift() || null;
+      }
+    }
+    return null;
+  }
+}

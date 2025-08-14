@@ -1,7 +1,7 @@
 'use client';
 
 // library
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // components
 import Header from './_components/Header';
