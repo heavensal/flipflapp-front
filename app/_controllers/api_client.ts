@@ -1,6 +1,10 @@
 // app/_controllers/api_client.ts
 import { authController } from './auth_controller';
 
+interface ProfileData {
+  [key: string]: unknown;
+}
+
 export class ApiClient {
   private readonly API_BASE_URL = 'http://127.0.0.1:3000';
 
@@ -86,10 +90,10 @@ export class ApiClient {
 
     if (!response.ok) {
       throw new Error('Erreur lors de la création de l\'événement');
-    }
-    return await response.json();
-  }
-
+  /**
+   * Mettre à jour le profil utilisateur
+   */
+  async updateProfile(profileData: ProfileData) {
   /**
    * Mettre à jour le profil utilisateur
    */

@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import Header from './_components/Header';
 import IconesSlide1 from './_components/IconesSlide1';
 import IconesSlide2 from './_components/IconesSlide2';
+import IconesSlide3 from './_components/IconesSlide3';
 import Footer from './_components/Footer';
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
       description: "Ils sont sur la feuille de match ? Sur le banc ? Tes amis peuvent facilement rejoindre le match.",
     },
     {
+      component: <IconesSlide3 />,
       title: "Le match peut commencer !",
       description: "Pas d'excuse ! Les équipes sont faites, les joueurs ont l'heure, l'endroit, et tout le reste. Que la meilleure équipe gagne !"
     }
@@ -37,14 +39,6 @@ export default function Home() {
     const newCurrentSlide = Math.round(scrollLeft / slideWidth);
     setCurrentSlide(newCurrentSlide);
   };
-
-  // Auto-rotation du carrousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg-green to-bg-green-2 relative overflow-hidden">

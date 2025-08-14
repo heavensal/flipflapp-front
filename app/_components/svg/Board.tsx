@@ -1,0 +1,82 @@
+const Board = () => {
+  return (
+    <svg
+        className="h-20 rotate-205 transform"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 972.801 972.801"
+        xmlSpace="preserve"
+    >
+        {/* Tableau noir */}
+        <rect x="0" y="249.1" width="972.801" height="655.5" fill="#111" />
+        {/* Terrain vert */}
+        <rect
+            x="213.1"
+            y="416.5"
+            width="546.6"
+            height="325.3"
+            rx="25"
+            fill="#228B22"
+            stroke="#fff"
+            strokeWidth="8"
+        />
+        {/* Bordures blanches du terrain */}
+        <rect
+            x="213.1"
+            y="416.5"
+            width="546.6"
+            height="325.3"
+            rx="25"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="8"
+        />
+        {/* Lignes centrales */}
+        <line
+            x1={213.1 + 546.6 / 2}
+            y1="416.5"
+            x2={213.1 + 546.6 / 2}
+            y2={416.5 + 325.3}
+            stroke="#fff"
+            strokeWidth="4"
+        />
+        {/* Cercle central */}
+        <circle
+            cx={213.1 + 546.6 / 2}
+            cy={416.5 + 325.3 / 2}
+            r="40"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="4"
+        />
+        {/* Buts */}
+        <rect
+            x="213.1"
+            y={416.5 + 325.3 / 2 - 40}
+            width="20"
+            height="80"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="4"
+        />
+        <rect
+            x={213.1 + 546.6 - 20}
+            y={416.5 + 325.3 / 2 - 40}
+            width="20"
+            height="80"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="4"
+        />
+        {/* Ancien chemin du tableau (pour les coins arrondis et détails) */}
+        <path
+            d="M957.801 249.1c8.299 0 15-6.7 15-15s-6.701-15-15-15H809.4c2.299-5.4 3.6-11.3 3.6-17.5 0-19.2-12.301-35.6-29.4-41.8V53.2c0-8.3-6.699-15-15-15-8.299 0-15 6.7-15 15v106.6c-17.1 6.2-29.4 22.6-29.4 41.8 0 6.2 1.301 12.1 3.602 17.5H245c2.3-5.4 3.6-11.3 3.6-17.5 0-19.2-12.3-35.6-29.4-41.8V53.2c0-8.3-6.7-15-15-15s-15 6.7-15 15v106.6c-17.1 6.2-29.4 22.6-29.4 41.8 0 6.2 1.3 12.1 3.6 17.5H15c-8.3 0-15 6.7-15 15s6.7 15 15 15h4.5v655.5H15c-8.3 0-15 6.699-15 15s6.7 15 15 15h942.801c8.299 0 15-6.7 15-15s-6.701-15-15-15h-4.5V249.1z"
+            fill="none"
+            stroke="#111"
+            strokeWidth="10"
+        />
+    </svg>
+
+  );
+};
+
+export default Board;
