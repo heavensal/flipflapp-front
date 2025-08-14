@@ -6,13 +6,13 @@ import Board from './svg/Board';
 const IconesSlide2 = () => {
 
   return (
-    <div className='flex justify-between items-center mb-8'>
+    <div className='grid grid-cols-2 mb-8'>
 
-      <div className='text-center w-1/2'>
-        <Image src="/player-10.png" alt="Joueur de football" width={1024} height={1024} className="object-contain max-h-40" />
+      <div className='place-content-center'>
+        <Image src="/player-10.png" alt="Joueur de football" width={1024} height={1024} className="object-contain max-h-30" />
       </div>
 
-      <div className='flex justify-center items-center w-1/2'>
+      <div className='flex justify-center items-center'>
         {/* smartphone */}
         <Smartphone />
 

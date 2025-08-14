@@ -4,7 +4,7 @@ const Calendar = () => {
       viewBox="0 0 48 48"
       version="1"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute left-0 transform -rotate-25 h-20 z-10"
+      className="transform -rotate-25 h-20 z-10"
     >
       <path fill="#CFD8DC" d="M5 38V14h38v24c0 2.2-1.8 4-4 4H9c-2.2 0-4-1.8-4-4"/>
       <path fill="#F44336" d="M43 10v6H5v-6c0-2.2 1.8-4 4-4h30c2.2 0 4 1.8 4 4"/>
