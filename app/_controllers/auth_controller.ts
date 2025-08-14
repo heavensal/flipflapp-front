@@ -111,7 +111,7 @@ class AuthController {
     return { accessToken, client, uid };
   }
 
-  private async setAuthCookies(tokens: AuthTokens): Promise<void> {
+  async setAuthCookies(tokens: AuthTokens): Promise<void> {
     const cookieStore = await cookies();
     const expires = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000); // 14 jours
 
@@ -142,6 +142,27 @@ class AuthController {
     });
 
     console.log('✅ Cookies créés avec succès');
+  }
+
+  /**
+   * 🎫 GET AUTH TOKENS - Récupérer les tokens depuis les cookies
+   */
+  async getAuthTokens(): Promise<AuthTokens | null> {
+    try {
+      const cookieStore = await cookies();
+      const accessToken = cookieStore.get('access-token')?.value;
+      const client = cookieStore.get('client')?.value;
+      const uid = cookieStore.get('uid')?.value;
+
+      if (!accessToken || !client || !uid) {
+        return null;
+      }
+
+      return { accessToken, client, uid };
+    } catch (error) {
+      console.error('Erreur lors de la récupération des tokens:', error);
+      return null;
+    }
   }
 }
 

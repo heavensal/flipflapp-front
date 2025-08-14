@@ -62,9 +62,8 @@ export class ApiClient {
     }
   }
 
-  // 📝 EXEMPLES D'UTILISATION PRATIQUE
-
   /**
+   * 📝 EXEMPLES D'UTILISATION PRATIQUE
    * Récupérer la liste des événements (avec authentification)
    */
   async getEvents() {
@@ -74,42 +73,7 @@ export class ApiClient {
     }
     return await response.json();
   }
-
 }
 
 // Export singleton instance
 export const apiClient = new ApiClient();
-
-// app/_controllers/auth_controller.ts
-export class AuthController {
-
-  async getAuthTokens() {
-    // Implementation to retrieve auth tokens from cookies or storage
-    // This is a placeholder - you'll need to implement the actual logic
-    const accessToken = this.getCookie('access-token');
-    const client = this.getCookie('client');
-    const uid = this.getCookie('uid');
-
-    if (accessToken && client && uid) {
-      return {
-        accessToken,
-        client,
-        uid
-      };
-    }
-
-    return null;
-  }
-
-  private getCookie(name: string): string | null {
-    // Simple cookie getter implementation
-    if (typeof document !== 'undefined') {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop()?.split(';').shift() || null;
-      }
-    }
-    return null;
-  }
-}
