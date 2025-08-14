@@ -3,8 +3,7 @@ const Map = () => {
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-0 transform h-20 z-20"
-      style={{ right: '20px' }}
+      className="absolute right-5 transform h-20 z-20 rotate-25"
     >
       <path d="m8 2 8 1v19l-8-1z" fill="#ecf0f1"/>
       <path d="m2 3 6-1v19l-6 1zm14 0 6-1v19l-6 1z" fill="#bdc3c7"/>

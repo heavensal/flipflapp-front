@@ -41,31 +41,25 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-green to-bg-green-2 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-bg-green to-bg-green-2 relative overflow-hidden">
 
-      <div className="relative z-10 min-h-screen flex flex-col">
-
-        {/* Header */}
         <Header />
 
         {/* Carrousel principal */}
         <main className="flex-1 px-4 sm:px-8 py-4">
-          <div className="w-full h-full">
 
             {/* Card du carrousel */}
-            <div className="bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl h-full overflow-hidden">
+            <div className="py-4 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl">
 
               {/* Conteneur avec snap horizontal */}
-              <div
-                className="flex h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+              <div className="flex h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide overflow-hidden scroll-smooth overscroll-x-contain"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                onScroll={handleScroll}
-              >
+                onScroll={handleScroll}>
+
                 {slides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className="w-full flex-shrink-0 snap-center flex flex-col justify-center px-8 sm:px-12 py-16"
-                  >
+                  <div className="w-full flex-shrink-0 snap-center flex flex-col justify-center px-8 sm:px-12 py-16 snap-always"
+                    key={index}>
+
                     {/* Structure uniforme pour tous les slides */}
                     <div className="text-center max-w-4xl mx-auto">
 
@@ -76,24 +70,25 @@ export default function Home() {
 
                       {/* Zone du titre - hauteur fixe */}
                       <div className="sm:h-24 mb-6 flex items-center justify-center">
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center leading-tight">
+                        <h2 className="text-4xl sm:text-4xl lg:text-4xl text-white text-center leading-tight">
                           {slide.title}
                         </h2>
                       </div>
 
                       {/* Zone de description - hauteur fixe */}
                       <div className=" sm:h-20 flex items-center justify-center">
-                        <p className="text-lg text-indigo-100/80 leading-relaxed text-center max-w-3xl">
+                        <p className=" text-indigo-100/80 leading-relaxed text-center max-w-3xl">
                           {slide.description}
                         </p>
                       </div>
                     </div>
                   </div>
                 ))}
+
               </div>
 
               {/* Indicateurs de slides uniquement */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="flex justify-center items-center">
                 <div className="flex space-x-3">
                   {slides.map((_, index) => (
                     <div
@@ -108,12 +103,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+
         </main>
 
         <Footer />
 
-      </div>
     </div>
   );
 }

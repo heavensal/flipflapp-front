@@ -1,7 +1,7 @@
 const Smartphone = () => {
   return (
     <svg
-      className="h-20 -rotate-25"
+      className="h-24 -rotate-25"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >

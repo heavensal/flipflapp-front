@@ -1,7 +1,7 @@
 const Board = () => {
   return (
     <svg
-        className="h-20 rotate-205 transform"
+        className="h-24 rotate-205 transform"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 972.801 972.801"
         xmlSpace="preserve"
