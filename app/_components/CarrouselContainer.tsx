@@ -12,17 +12,17 @@ const CarrouselContainer = () => {
     {
       component: <IconesSlide1 />,
       title: "Organise ton match",
-      description: "Planifie rapidement: donne l'heure, l'endroit, le nombre de joueurs. C'est toi qui décide."
+      description: (<>Planifie rapidement: donne l&apos;heure, l&apos;endroit, le nombre de joueurs.<br /> C&apos;est toi qui décide.</>),
     },
     {
       component: <IconesSlide2 />,
       title: "Invite tes amis",
-      description: "Ils sont sur la feuille de match ? Sur le banc ? Tes amis peuvent facilement rejoindre le match.",
+      description: (<>Ils sont sur la feuille de match ?<br /> Sur le banc ?<br /> Tes amis peuvent facilement rejoindre le match.</>),
     },
     {
       component: <IconesSlide3 />,
-      title: "Le match peut commencer !",
-      description: "Pas d'excuse ! Les équipes sont faites, les infos sont là. Que le meilleur gagne !"
+      title: "Le match commence !",
+      description: (<>Pas d&apos;excuse !<br /> Les équipes sont faites, les infos sont là.<br />Que le meilleur gagne !</>),
     }
   ];
 
