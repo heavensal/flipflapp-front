@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import SnapchatIcon from './svg/Snapchat';
-import FacebookIcon from './svg/Facebook';
-import TelegramIcon from './svg/Telegram';
-import WhatsappIcon from './svg/Whatsapp';
-import TwitterIcon from './svg/Twitter';
-import InstagramIcon from './svg/Instagram';
+import SnapchatIcon from './svg/social-networks/Snapchat';
+import FacebookIcon from './svg/social-networks/Facebook';
+import TelegramIcon from './svg/social-networks/Telegram';
+import WhatsappIcon from './svg/social-networks/Whatsapp';
+import TwitterIcon from './svg/social-networks/Twitter';
+import InstagramIcon from './svg/social-networks/Instagram';
 import SweetAlert from './SweetAlert';
 
 interface FormData {
@@ -115,11 +115,63 @@ const BetaTesterForm = () => {
   };
 
   // Soumission du formulaire
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isFormValid()) return;
 
     setIsLoading(true);
+        try {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/beta_testers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          beta_tester: {
+            ...formData,
+            age: parseInt(formData.age)
+          }
+        }),
+      });
+
+      if (response.ok) {
+        setAlertConfig({
+          type: 'success',
+          title: 'Inscription réussie !',
+          message: 'Merci de votre intérêt pour FlipFlapp. Vous serez contacté bientôt !'
+        });
+        setShowAlert(true);
+
+        // Reset du formulaire
+        setFormData({
+          first_name: '',
+          last_name: '',
+          email: '',
+          phone: '',
+          favorite_social_network: '',
+          social_network_name: '',
+          age: ''
+        });
+        setErrors({});
+      } else {
+        setAlertConfig({
+          type: 'error',
+          title: 'Erreur d\'inscription',
+          message: 'Une erreur est survenue. Veuillez réessayer.'
+        });
+        setShowAlert(true);
+      }
+    } catch {
+      setAlertConfig({
+        type: 'error',
+        title: 'Erreur réseau',
+        message: 'Problème de connexion. Vérifiez votre internet.'
+      });
+      setShowAlert(true);
+    } finally {
+      setIsLoading(false);
+    }
     // Simuler un appel API
     setTimeout(() => {
       setIsLoading(false);
@@ -222,31 +274,33 @@ const BetaTesterForm = () => {
                 <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
               )}
             </div>
+
             {/* Réseau social favori */}
             <div>
               <label className="block text-sm font-medium text-indigo-100/80 mb-2">
                 Réseau social favori *
               </label>
-              <div className="flex gap-2">
-                {socialNetworks.map(network => {
-                  const isSelected = formData.favorite_social_network === network;
-                  return (
-                    <button
-                      type="button"
-                      key={network}
-                      onClick={() => {
-                        setFormData(prev => ({ ...prev, favorite_social_network: network }));
-                        setErrors(prev => ({ ...prev, favorite_social_network: undefined }));
-                      }}
-                      className={`flex flex-col items-center justify-center px-2 py-1 rounded border-2 transition-all focus:outline-none ${
-                        isSelected ? 'border-yellow-500 bg-yellow-100' : 'border-gray-300 bg-white opacity-60'
-                      }`}
-                      aria-pressed={isSelected}
-                    >
-                      {getSocialIcon(network)}
-                    </button>
-                  );
-                })}
+              <div className="grid grid-cols-3 gap-2 ">
+                  {socialNetworks.map(network => {
+                    const isSelected = formData.favorite_social_network === network;
+                    return (
+                      <div key={network} className='text-center'>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData(prev => ({ ...prev, favorite_social_network: network }));
+                            setErrors(prev => ({ ...prev, favorite_social_network: undefined }));
+                          }}
+                          className={`place-content-center px-2 py-1 border-2 transition-all focus:outline-none ${
+                            isSelected ? 'border-yellow-500 bg-form-green' : 'border-form-green opacity-60'
+                          }`}
+                          aria-pressed={isSelected}
+                        >
+                          {getSocialIcon(network)}
+                        </button>
+                      </div>
+                    );
+                  })}
               </div>
               {errors.favorite_social_network && (
                 <p className="mt-1 text-sm text-red-600">{errors.favorite_social_network}</p>
@@ -302,11 +356,11 @@ const BetaTesterForm = () => {
               disabled={!isFormValid() || isLoading}
               className={`w-full py-3 px-4 font-medium transition-all ${
                 isFormValid() && !isLoading
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white cursor-pointer'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  ? 'bg-yellow-500  text-white cursor-pointer'
+                  : 'bg-yellow-200 text-gray-500 cursor-not-allowed'
               }`}
             >
-              {isLoading ? 'Inscription en cours...' : 'Rejoindre la beta'}
+              {isLoading ? 'Inscription en cours...' : 'Me préinscrire à la beta'}
             </button>
           </form>
         </div>
