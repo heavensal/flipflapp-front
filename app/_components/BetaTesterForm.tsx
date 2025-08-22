@@ -333,18 +333,24 @@ const BetaTesterForm = () => {
               <label htmlFor="age" className="block text-sm font-medium text-indigo-100/80 mb-2">
                 Âge *
               </label>
-              <input
-                id="age"
-                name="age"
-                type="number"
-                value={formData.age}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 border-2 placeholder:text-form-green focus:ring-2 text-indigo-100/80 focus:ring-yellow-500 focus:border-transparent outline-none transition-all ${
-                  errors.age ? 'border-red-500 focus:ring-red-500 text-red-500' : 'border-form-green'
-                }`}
-                placeholder="25"
-                min="1"
-              />
+              <div className="relative">
+                <input
+                  id="age"
+                  name="age"
+                  type="number"
+                  value={formData.age}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 pr-12 border-2 placeholder:text-form-green focus:ring-2 text-indigo-100/80 focus:ring-yellow-500 focus:border-transparent outline-none transition-all ${
+                    errors.age ? 'border-red-500 focus:ring-red-500 text-red-500' : 'border-form-green'
+                  }`}
+                  placeholder="25"
+                  min="1"
+                  step="1"
+                />
+                <span className="absolute inset-y-0 right-4 flex items-center text-indigo-100/80 pointer-events-none">
+                  ans
+                </span>
+              </div>
               {errors.age && (
                 <p className="mt-1 text-sm text-red-600">{errors.age}</p>
               )}
