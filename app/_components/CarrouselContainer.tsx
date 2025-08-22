@@ -35,7 +35,7 @@ const CarrouselContainer = () => {
   };
 
   return (
-    <div id="container-and-slides-indicators" className="h-[80dvh]">
+    <div id="container-and-slides-indicators" className="min-h-[80dvh]">
 
       {/* Conteneur avec snap horizontal */}
       <section

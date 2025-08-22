@@ -3,6 +3,7 @@
 // components
 import Header from './_components/Header';
 import CarrouselContainer from './_components/CarrouselContainer';
+import BetaTesterForm from './_components/BetaTesterForm';
 import Footer from './_components/Footer';
 
 export default function Home() {
@@ -16,8 +17,9 @@ export default function Home() {
         {/* 80dvh */}
         <main className="flex-1 px-4 sm:px-8 py-4">
           <CarrouselContainer />
+          {/* Vous pouvez décommenter cette ligne pour tester le formulaire beta */}
+          <BetaTesterForm />
         </main>
-
         <Footer />
 
     </div>

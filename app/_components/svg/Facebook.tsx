@@ -1,0 +1,23 @@
+const FacebookIcon = () => (
+  <svg
+    width={24}
+    height={24}
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x="0"
+      y="0"
+      width="20"
+      height="20"
+      rx="4"
+      fill="#1877F2"
+    />
+    <path
+      d="M13.12 18v-6.2h2.08l.31-2.41h-2.39V7.85c0-.7.2-1.18 1.2-1.18h1.28V4.51c-.22-.03-.98-.09-1.86-.09-1.85 0-3.11 1.12-3.11 3.19v1.78H8.46v2.41h2.09V18h2.57z"
+      fill="#fff"
+    />
+  </svg>
+);
+
+export default FacebookIcon;
