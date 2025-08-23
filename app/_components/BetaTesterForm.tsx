@@ -139,7 +139,7 @@ const BetaTesterForm = () => {
         setAlertConfig({
           type: 'success',
           title: 'Inscription réussie !',
-          message: 'Merci de votre intérêt pour FlipFlapp. Vous serez contacté bientôt !'
+          message: 'Merci de ton intérêt pour FlipFlapp. Tu seras contacté bientôt !'
         });
         setShowAlert(true);
 
@@ -158,7 +158,7 @@ const BetaTesterForm = () => {
         setAlertConfig({
           type: 'error',
           title: 'Erreur d\'inscription',
-          message: 'Une erreur est survenue. Veuillez réessayer.'
+          message: "Le formulaire contient une erreur ou l'email est déjà utilisé"
         });
         setShowAlert(true);
       }
@@ -172,16 +172,6 @@ const BetaTesterForm = () => {
     } finally {
       setIsLoading(false);
     }
-    // Simuler un appel API
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowAlert(true);
-      setAlertConfig({
-        type: 'success',
-        title: 'Inscription réussie',
-        message: 'Merci de vous être inscrit à la beta!'
-      });
-    }, 2000);
   };
 
   return (
@@ -190,7 +180,7 @@ const BetaTesterForm = () => {
         <div className="max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8 pt-8">
-            <h2 className="text-3xl text-white mb-2">Rejoignez les beta testeurs</h2>
+            <h2 className="text-3xl text-white mb-2" id="beta-tester-title">Rejoignez les beta testeurs</h2>
           </div>
           {/* Formulaire */}
           <form onSubmit={handleSubmit} className="p-6 space-y-6">

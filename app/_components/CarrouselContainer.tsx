@@ -4,6 +4,7 @@ import { useState } from 'react';
 import IconesSlide1 from './IconesSlide1';
 import IconesSlide2 from './IconesSlide2';
 import IconesSlide3 from './IconesSlide3';
+import GoToForm from './GoToForm';
 
 const CarrouselContainer = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -35,7 +36,7 @@ const CarrouselContainer = () => {
   };
 
   return (
-    <div id="container-and-slides-indicators" className="min-h-[80dvh]">
+    <div id="container-and-slides-indicators" className="h-[80dvh]">
 
       {/* Conteneur avec snap horizontal */}
       <section
@@ -89,6 +90,8 @@ const CarrouselContainer = () => {
           ))}
         </div>
       </div>
+
+      <GoToForm />
 
     </div>
   );
